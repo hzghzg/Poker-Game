@@ -10,6 +10,7 @@ public class Poker {
         levelList.add(1);
         updateToLevelTwo(countTrumpSameNumResult, levelList);
         updateToLevelThree(countTrumpSameNumResult, levelList);
+        updateToLevelFour(countTrumpSameNumResult, levelList);
         return levelList;
     }
 
@@ -21,5 +22,10 @@ public class Poker {
     private void updateToLevelThree(Map countTrumpSameNumResult, List<Integer> levelList) {
         List<Integer> pokerNumCount=new ArrayList<Integer>(countTrumpSameNumResult.values());
         if(pokerNumCount.stream().filter(currentValue->currentValue==2).collect(Collectors.toList()).size()==2) levelList.add(3);
+    }
+
+    private void updateToLevelFour(Map countTrumpSameNumResult, List<Integer> levelList) {
+        if(countTrumpSameNumResult.containsValue(3))
+            levelList.add(4);
     }
 }
