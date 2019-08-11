@@ -8,7 +8,6 @@ public class JudgeMachine {
 
     public String  judgeTheWinner(PokerHands player1, PokerHands player2) {
         Poker poker=new Poker();
-        String orderRule=Poker.ORDERRULE;
         List<String> trumps1=player1.getTrumps();
         List<String> trumps2=player2.getTrumps();
         Map countTrump1SameNumResult=new HashMap();
@@ -59,10 +58,11 @@ public class JudgeMachine {
         setPairNumList(trumps2PairNumList, trumps2ToIntegerList);
     }
 
-    private void setPairNumList(List<Integer> trumps1PairNumList, List<Integer> trumps1ToIntegerList) {
-        trumps1ToIntegerList.stream().forEach(currentValue -> {
-            if (trumps1ToIntegerList.stream().filter(currentValue1 -> currentValue == currentValue1).collect(Collectors.toList()).size() == 2)
-                trumps1PairNumList.add(currentValue);
+    private void setPairNumList(List<Integer> trumpsPairNumList, List<Integer> trumpsToIntegerList) {
+        trumpsToIntegerList.stream().forEach(currentValue -> {
+            if (trumpsToIntegerList.stream().filter(currentValue1 -> currentValue == currentValue1).collect(Collectors.toList()).size() == 2)
+                if(!trumpsPairNumList.contains(currentValue))
+                trumpsPairNumList.add(currentValue);
         });
     }
 
@@ -96,7 +96,7 @@ public class JudgeMachine {
                         return currentValue="0";
                     return currentValue;
                 }).collect(Collectors.toList());
-                countTrumpSameNumResult.put(currentPokerNum,count);
+                countTrumpSameNumResult.put(String.valueOf(currentPokerNum),count);
             }
         }
     }
