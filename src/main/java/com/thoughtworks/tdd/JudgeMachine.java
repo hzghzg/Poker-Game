@@ -36,7 +36,12 @@ public class JudgeMachine {
             else{//等级相等且等级不为1时
                 List<Integer> trumps1PairNumList=new ArrayList<>();
                 List<Integer> trumps2PairNumList=new ArrayList<>();
-                if(currentLevel!=2) currentLevel=currentLevel-1;
+                if(currentLevel!=2) {
+                    if(currentLevel!=5)
+                        currentLevel=currentLevel-1;
+                    else
+                        currentLevel=1;
+                }
                 getPairNumList(trumps1, trumps2,trumps1PairNumList,trumps2PairNumList,currentLevel);
                 for (int j = 0; j <trumps1PairNumList.size() ; j++) {
                     if (judgeTheWinnerDirectly(i, trumps1PairNumList, trumps2PairNumList))
