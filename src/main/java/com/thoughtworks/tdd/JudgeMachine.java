@@ -28,6 +28,7 @@ public class JudgeMachine {
         trumps1Level=trumps1Level.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         trumps2Level=trumps2Level.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         for (int i = 0; i < trumps1Level.size(); i++) {
+            int currentLevel=trumps1Level.get(i);
             if (judgeTheWinnerDirectly(i, trumps1Level, trumps2Level))//能直接通过等级比出
                 return trumps1Level.get(i) > trumps2Level.get(i) ? "Player1 win!" : "Player2 win!";
             //等级相等且等级为1，直接比大小
@@ -35,10 +36,12 @@ public class JudgeMachine {
             else{//等级相等且等级不为1时
                 List<Integer> trumps1PairNumList=new ArrayList<>();
                 List<Integer> trumps2PairNumList=new ArrayList<>();
-                getPairNumList(trumps1, trumps2,trumps1PairNumList,trumps2PairNumList);
+                if(currentLevel!=2) currentLevel=currentLevel-1;
+                getPairNumList(trumps1, trumps2,trumps1PairNumList,trumps2PairNumList,currentLevel);
                 for (int j = 0; j <trumps1PairNumList.size() ; j++) {
                     if (judgeTheWinnerDirectly(i, trumps1PairNumList, trumps2PairNumList))
                         return trumps1PairNumList.get(i) > trumps2PairNumList.get(i) ? "Player1 win!" : "Player2 win!";
+
                 }
             }
         }
@@ -51,16 +54,16 @@ public class JudgeMachine {
         return false;
     }
 
-    private void getPairNumList(List<String> trumps1, List<String> trumps2,List<Integer> trumps1PairNumList,List<Integer> trumps2PairNumList) {
+    private void getPairNumList(List<String> trumps1, List<String> trumps2,List<Integer> trumps1PairNumList,List<Integer> trumps2PairNumList,int currentLevel) {
         List<Integer> trumps1ToIntegerList= covertTrumpsToIntegerList(trumps1);
         List<Integer> trumps2ToIntegerList= covertTrumpsToIntegerList(trumps2);
-        setPairNumList(trumps1PairNumList, trumps1ToIntegerList);
-        setPairNumList(trumps2PairNumList, trumps2ToIntegerList);
+        setPairNumList(trumps1PairNumList, trumps1ToIntegerList,currentLevel);
+        setPairNumList(trumps2PairNumList, trumps2ToIntegerList,currentLevel);
     }
 
-    private void setPairNumList(List<Integer> trumpsPairNumList, List<Integer> trumpsToIntegerList) {
+    private void setPairNumList(List<Integer> trumpsPairNumList, List<Integer> trumpsToIntegerList,int currentLevel) {
         trumpsToIntegerList.stream().forEach(currentValue -> {
-            if (trumpsToIntegerList.stream().filter(currentValue1 -> currentValue == currentValue1).collect(Collectors.toList()).size() == 2)
+            if (trumpsToIntegerList.stream().filter(currentValue1 -> currentValue == currentValue1).collect(Collectors.toList()).size() == currentLevel)
                 if(!trumpsPairNumList.contains(currentValue))
                 trumpsPairNumList.add(currentValue);
         });
