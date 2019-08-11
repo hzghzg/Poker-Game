@@ -51,4 +51,17 @@ class JudgeMachineTest {
         assertEquals("Player1 win!",winnerMessage);
     }
 
+    @Test
+    void shouldReturnPlayer2win_whenJudgeTheWinner_givenPlayer1Trumps3H3D6DAndPlayer2Trumps5K5C2C() {
+        List<String> trumps1= Arrays.asList("3H","3D","6D");
+        PokerHands player1=new PokerHands();
+        player1.setTrumps(trumps1);
+        List<String> trumps2= Arrays.asList("5K","5C","2C");
+        PokerHands player2=new PokerHands();
+        player2.setTrumps(trumps2);
+        JudgeMachine judgeMachine=new JudgeMachine();
+        String winnerMessage=judgeMachine.judgeTheWinner(player1,player2);
+        assertEquals("Player2 win!",winnerMessage);
+    }
+
 }
