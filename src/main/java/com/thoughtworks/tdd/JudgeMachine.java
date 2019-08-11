@@ -29,11 +29,11 @@ public class JudgeMachine {
         trumps1Level=trumps1Level.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         trumps2Level=trumps2Level.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         for (int i = 0; i < trumps1Level.size(); i++) {
-            if (judgeTheWinnerDirectly(i, trumps1Level, trumps2Level))
+            if (judgeTheWinnerDirectly(i, trumps1Level, trumps2Level))//能直接通过等级比出
                 return trumps1Level.get(i) > trumps2Level.get(i) ? "Player1 win!" : "Player2 win!";
             //等级相等且等级为1，直接比大小
             if(trumps1Level.get(i)==1) return compareHighCard(trumps1,trumps2);
-            else{
+            else{//等级相等且等级不为1时
                 List<Integer> trumps1PairNumList=new ArrayList<>();
                 List<Integer> trumps2PairNumList=new ArrayList<>();
                 getPairNumList(trumps1, trumps2,trumps1PairNumList,trumps2PairNumList);
