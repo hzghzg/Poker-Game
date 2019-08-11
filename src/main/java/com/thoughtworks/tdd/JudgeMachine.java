@@ -41,7 +41,6 @@ public class JudgeMachine {
                 for (int j = 0; j <trumps1PairNumList.size() ; j++) {
                     if (judgeTheWinnerDirectly(i, trumps1PairNumList, trumps2PairNumList))
                         return trumps1PairNumList.get(i) > trumps2PairNumList.get(i) ? "Player1 win!" : "Player2 win!";
-
                 }
             }
         }
