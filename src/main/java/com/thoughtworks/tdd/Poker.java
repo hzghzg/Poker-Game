@@ -12,6 +12,7 @@ public class Poker {
         updateToLevelThree(countTrumpSameNumResult, levelList);
         updateToLevelFour(countTrumpSameNumResult, levelList);
         updateToLevelFive(trumps, levelList);
+        updateToLevelSix(trumps, levelList);
         return levelList;
     }
 
@@ -38,6 +39,17 @@ public class Poker {
         }
         if(count==4) levelList.add(5);
     }
+
+    private void updateToLevelSix(List<String> trumps, List<Integer> levelList) {
+        List<String> pokerTypeList=getTypeList(trumps);
+        if(pokerTypeList.stream().filter(currentValue->currentValue.equals(pokerTypeList.get(0))).collect(Collectors.toList()).size()==5)
+            levelList.add(6);
+    }
+
+    private List<String> getTypeList(List<String> trumps) {
+        return trumps.stream().map(currentValue->String.valueOf(currentValue.charAt(1))).collect(Collectors.toList());
+    }
+
     private List<Integer> covertTrumpsToIntegerList(List<String> trumps) {
         return trumps.stream().map(currentValue -> Poker.ORDERRULE.indexOf(currentValue.charAt(0)) + 1)
                 .collect(Collectors.toList())
