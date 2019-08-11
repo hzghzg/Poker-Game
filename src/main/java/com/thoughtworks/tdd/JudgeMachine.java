@@ -18,8 +18,8 @@ public class JudgeMachine {
         List<Integer> trumps1Level=new ArrayList<>();
         List<Integer> trumps2Level=new ArrayList<>();
         //得出牌组拥有的等级
-        trumps1Level=poker.getLevelListRule(countTrump1SameNumResult);
-        trumps2Level=poker.getLevelListRule(countTrump2SameNumResult);
+        trumps1Level=poker.getLevelListRule(trumps1,countTrump1SameNumResult);
+        trumps2Level=poker.getLevelListRule(trumps2,countTrump2SameNumResult);
         return compareResult(trumps1Level,trumps2Level,trumps1,trumps2);
 
     }
