@@ -20,7 +20,7 @@ class JudgeMachineTest {
         PokerHands player2=new PokerHands();
         player2.setTrumps(trumps2);
         JudgeMachine judgeMachine=new JudgeMachine();
-        PokerHands winner=judgeMachine.judgeTheWinner(player1,player2);
-        assertEquals(player2,winner);
+        String winnerMessage=judgeMachine.judgeTheWinner(player1,player2);
+        assertEquals("Player2 win!",winnerMessage);
     }
 }
