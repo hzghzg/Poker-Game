@@ -1,6 +1,6 @@
 # Poker-Game
 TDD for poker game
-###Poker Game TDD 过程
+### Poker Game TDD 过程
 1. case1
 player1:"2H"
 player2:"3D"
